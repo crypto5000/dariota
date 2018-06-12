@@ -79,7 +79,7 @@ while (i < padLength) {
 
 Each read of Dariota is at the 1 decimal precision range. Once a read has been queried, there are 5 precision ranges for filtering using decimals 1 to 5. For example, you can filter matches for XX.XX at the 2nd decimal level.
 
-The Dariota Payload uses a vertical lined spaced format. The type is a 4 letter identifier (e.g. CHAT,ITEM,SERV,REVI). The latitude and longitude are full precision coordinates (not filtered at 1 decimal). The data expiration is formatted mm-dd-yyyy. The dataAccount is a 27 character account to identify payment addresses. The dataAccount is overridden with a payment address (dataAddress). Finally, the dataText is just the standard message created by the user.
+The Dariota Payload uses a vertical lined spaced format. The type is a 4 letter identifier (e.g. CHAT,ITEM,SERV,REVI). The latitude and longitude are full precision coordinates (not filtered at 1 decimal). The data expiration is formatted mm-dd-yyyy. The dataAccount is a 27 character account to identify payment addresses. The dataAccount is overridden with a payment address (dataAddress) if available. Finally, the dataText is just the standard message created by the user.
 
 ```javascript
 // create the message payload format
