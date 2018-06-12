@@ -12,7 +12,7 @@ Use cases:
 * Decentralized yelp: you can leave reviews for businesses at locations. You can read reviews at locations.
 * Games: think Pokemon Go, but with IOTA. Treasure hunts at locations. 
 * Real Estate Info: housing prices, construction data, occupancy stats, etc.
-* Traffic of Incident Info: cars or passengers can post traffic accident data or construction delays
+* Traffic or Incident Info: cars or passengers can post traffic accident data or construction delays
 * Location-Based Advertising: you can advertise your business or special deals available at a time point
 * Yard Sales: you sell individual items at a point location
 * Airbnb reviews: you can leave reviews of airbnb hosts
