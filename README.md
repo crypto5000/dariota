@@ -21,7 +21,7 @@ Use cases:
 ![Write Demo](/img/writedemo.gif)
 
 ## Reading Data Demo
-![Write Demo](/img/writedemo.gif)
+![Read Demo](/img/readdemo.gif)
 
 ## Payment and Accounts
 Get paid for your data by attaching a payment account. For example, post a traffic accident and people can pay for your helpful data. Accounts are optional and guard against IOTA address reuse. If you don't want an account, you can still include a payment address.
