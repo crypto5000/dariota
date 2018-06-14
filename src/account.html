@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Dariota enables geolocation on the Tangle. You can read or write data at a specific location using latitude-longitude coordinates.">
+    <meta name="author" content="Dariota">
+
+    <title>Dariota: Accounts</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->    
+    <link href="https://fonts.googleapis.com/css?family=Lato: 300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    
+    <!-- Custom styles for this template -->
+    <link href="css/landing-page.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/portfolio-item.css" rel="stylesheet">
+    <link href="css/modern-business.css" rel="stylesheet">
+    <link href="css/2-col-portfolio.css" rel="stylesheet">      
+    <link rel="icon" href="./img/fav.ico" />	
+
+    <!-- Captcha Style -->
+    <style>
+    .text-xs-center {text-align: center;}        
+    .g-recaptcha {display: inline-block;}
+    </style>
+    
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+      <a class="navbar-brand" href="https://dariota.com/index.html">Dariota</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/crypto5000/dariota">Github</a>
+          </li>                    
+        </ul>
+      </div>
+    </nav>
+            
+    <!-- Page Content -->
+    <section class="content-section-a" style="padding-bottom:10px" id="createAccount">
+            
+        <div class="container">        
+                   
+            <div class="row text-center">
+            
+                <div class="col-lg-12">                    
+                    <h4 class="page-header">What's a Dariota Account?</h4>
+                    <p>Dariota accounts are associated with each posted data transaction. This allows someone to pay you for posted data. To prevent IOTA address reuse, you can update your payment address at any time.</p>                              
+                    <p class="alert alert-danger" role="alert">Please save your account and passwords to be able to update in the future.</p>                                        
+                    <hr class="intro-divider">                                                                       
+                </div>
+                <div class="col-lg-12">
+                    <h4 class="page-header">Create a New Dariota Account:</h4>
+                </div>
+                <div class="col-lg-12">           
+                    <form class="form-horizontal">
+                        <fieldset>
+                            <div class="form-group">                                        
+                                <label for="newAccount">Your Dariota Account:</label>
+                                <div class="col-xs-10">
+                                    <input type="text" class="form-control" style="width:80%;margin: 0 auto;" id="newAccount" value="Please Wait. Generating Account..." disabled>
+                                </div>                                        
+                            </div>                    
+                            <div class="form-group">                                        
+                                <label for="newPassword1">Create 15 Character Password #1:</label>
+                                <div class="col-xs-10">
+                                    <input type="password" class="form-control" style="width:80%;margin: 0 auto;" id="newPassword1">
+                                </div>                                        
+                            </div>                    
+                            <div class="form-group">                                        
+                                <label for="newPassword2">Create 12 Character Password #2:</label>
+                                <div class="col-xs-10">
+                                    <input type="password" class="form-control" style="width:80%;margin: 0 auto;" id="newPassword2">
+                                </div>                                        
+                            </div>                    
+                            <div class="form-group">                                        
+                                <label for="newAddress">Enter the IOTA payment address:</label>
+                                <div class="col-xs-10">
+                                    <input type="text" class="form-control" style="width:80%;margin: 0 auto;" id="newAddress" placeholder="Your IOTA Address">
+                                </div>                                        
+                            </div>                                                
+                            <div class="form-group">
+                                <div class="col-xs-offset-2 col-xs-10">                                        
+                                    <button type="submit" class="btn btn-primary" style="width:80%;margin: 0 auto;" id="createButton">Create Account</button>                                        
+                                    <img id="loadingNew" src="./img/loading.gif" alt="loading" height="40" width="40" style="display:none">&nbsp;&nbsp;&nbsp;<div id="loadingTextNew" style="display:none">Please Wait. Sending.</div>                    
+                                    <p class="alert alert-success" role="alert" id="successMessageNew" style="display:none">Success. Remember to save your account and passwords. Passwords are not recoverable. You can now post your account with any Dariota transaction to enable payments.</p>                              
+                                    <p class="alert alert-danger" role="alert" id="errorMessageNew" style="display:none">There was a problem creating your account. Try again later.</p>                              
+                                </div>                            
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>                        
+
+            </div>
+
+            <!-- /.row -->            
+        </div>      
+        <!-- /.container -->
+
+    </section>
+
+    <!-- Page Content -->
+    <section class="content-section-a" style="padding-bottom:10px" id="updateAccount">
+                
+        <div class="container">        
+        
+            <hr class="intro-divider">          
+            <div class="row text-center">
+            
+                <div class="col-lg-12">
+                    <h4 class="page-header">Update Payment Address for Existing Account:</h4>
+                    <h5 class="page-header">* Updates are Manually Reviewed to Prevent Brute Force Attacks</h5>
+                </div>
+                <div class="col-lg-12">           
+                    <form class="form-horizontal">
+                        <fieldset>
+                            <div class="form-group">                                        
+                                <label for="account">Your Dariota Account:</label>
+                                <div class="col-xs-10">
+                                    <input type="text" class="form-control" style="width:80%;margin: 0 auto;" placeholder="Your Dariota Account" id="account">
+                                </div>                                        
+                            </div>                    
+                            <div class="form-group">                                        
+                                <label for="password1">15 Character Account Password #1:</label>
+                                <div class="col-xs-10">
+                                    <input type="password" class="form-control" style="width:80%;margin: 0 auto;" id="password1">
+                                </div>                                        
+                            </div>                    
+                            <div class="form-group">                                        
+                                <label for="password2">12 Character Account Password #2:</label>
+                                <div class="col-xs-10">
+                                    <input type="password" class="form-control" style="width:80%;margin: 0 auto;" id="password2">
+                                </div>                                        
+                            </div>                    
+                            <div class="form-group">                                        
+                                <label for="address">Enter New IOTA payment address:</label>
+                                <div class="col-xs-10">
+                                    <input type="text" class="form-control" style="width:80%;margin: 0 auto;" id="address" placeholder="Your IOTA Address">
+                                </div>                                        
+                            </div>                                                
+                            <div class="form-group text-xs-center">                                                                                        
+                                <div class="g-recaptcha" data-sitekey=""></div>                                                  
+                            </div>                                                          
+                            <div class="form-group">
+                                <div class="col-xs-offset-2 col-xs-10">
+                                    <button type="submit" class="btn btn-primary" style="width:80%;margin: 0 auto;" id="updateButton">Update Account</button>                                        
+                                    <img id="loadingUpdate" src="./img/loading.gif" alt="loading" height="40" width="40" style="display:none">&nbsp;&nbsp;&nbsp;<div id="loadingTextUpdate" style="display:none">Please Wait. Sending.</div>                    
+                                    <p class="alert alert-success" role="alert" id="successMessageUpdate" style="display:none">Your update request is being reviewed and will be processed shortly.</p>                              
+                                    <p class="alert alert-danger" role="alert" id="errorMessageUpdate" style="display:none">There was a problem updating your account. Try again later.</p>                              
+                                </div>                            
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>                        
+
+            </div>
+
+            <!-- /.row -->            
+        </div>      
+        <!-- /.container -->
+
+    </section>
+        
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper/popper.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>    
+    <script type="text/javascript" src="js/xss.js"></script>
+    
+    <!-- Page-Level Demo Scripts -->
+    <script>
+    $(document).ready(function() {        
+        
+        // set current accounts                
+        var accountData = {};
+        var newAccount = "";
+        var pulls = 0;
+
+        // load accounts        
+        $.ajax({
+            type: "GET",
+            url: 'https://dariota.com/accounts.json',
+            contentType: 'application/json',                    
+            success: function(res){
+                // set up the accounts
+                accountData = res;
+                // create a new account
+                newAccount = generateAccount();
+                verifyAccount(pulls,accountData,newAccount);
+            },
+            error: function(){                    
+                alert("There was a problem generating accounts. Try again later.");
+                return false;
+            }
+        });
+                
+        // verify that account doesn't exist - 10 pulls        
+        function verifyAccount(pullCount,accountData,newAccount) {
+            
+            // set up the key regex                        
+            var regex = new RegExp(newAccount, "g");
+            var filtered = "";
+            var accountExists = "no";
+            for (key in accountData) {
+                if (key.match(regex)) {
+                    // account already exists,
+                    accountExists = "yes";
+                    break;
+                }
+            }            
+
+            if (accountExists == "no") {
+                // doesn't exist yet - set account name
+                $("#newAccount").val(newAccount);
+                return true;
+            } else {
+                // exists already - try again
+                newAccount = generateAccount();
+                pullCount++;
+                if (pullCount < 10) {
+                    verifyAccount(pullCount,accountData,newAccount);
+                } else {
+                    alert("Please try again later. There is a problem with Dariota accounts.");        
+                    return false;
+                }
+            }
+
+        }
+
+        function generateAccount() {
+              const validChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ9';
+              return Array.from(new Array(27), (x, i) => validChars[Math.floor(Math.random() * validChars.length)]).join('');
+        }
+
+        // handle the new button click
+        $("#createButton").on( "click", function() {		
+
+            // get values
+            let account = $("#newAccount").val();
+            let password1 = $("#newPassword1").val();
+            let password2 = $("#newPassword2").val();
+            let address = $("#newAddress").val();
+
+            // sanitize
+            account = filterXSS(account);
+            password1 = filterXSS(password1);
+            password2 = filterXSS(password2);
+            address = filterXSS(address);
+
+            $('#loadingNew').hide();
+            $('#loadingTextNew').hide();	
+            $('#successMessageNew').hide();	
+            $('#errorMessageNew').hide();	
+
+            // check account exists
+            if (!account) {
+                alert("Account is invalid. Please enter a value.");                                        
+                return false;
+            }
+
+            // validate the account length             
+            if (account.length === 27) {
+                // do nothing
+            } else {
+                alert("Account is invalid. Account should be 27 characters.");                                        
+                return false;
+            }
+
+            // validate the account content
+            for (var j = 0; j < account.length; j++) {
+                if (("9ABCDEFGHIJKLMNOPQRSTUVWXYZ").indexOf(account.charAt(j)) < 0) {                            
+                    alert("Account should contain only letters A-Z or the number 9. Account is invalid.");                                        
+                    return false;
+                }
+            }
+
+            // check password1 exists
+            if (!password1) {
+                alert("Password #1 is invalid. Please enter a value.");                                        
+                return false;
+            }
+
+            // validate the password1 length             
+            if (password1.length === 15) {
+                // do nothing
+            } else {
+                alert("Password #1 is invalid. Password should be 15 characters.");                                        
+                return false;
+            }            
+
+            // check password2 exists
+            if (!password2) {
+                alert("Password #2 is invalid. Please enter a value.");                                        
+                return false;
+            }
+
+            // validate the password2 length             
+            if (password2.length === 12) {
+                // do nothing
+            } else {
+                alert("Password #2 is invalid. Password should be 12 characters.");                                        
+                return false;
+            }            
+
+            // check coin address exists
+            if (!address) {
+                alert("Payment address is invalid. Please enter a value.");                                        
+                return false;
+            }
+
+            // validate the address length             
+            if ((address.length === 90) || (address.length === 81)) {
+                // do nothing
+            } else {
+                alert("Payment address is invalid. Addresses should be 90 characters.");                                        
+                return false;
+            }
+
+            // validate the address content
+            for (var j = 0; j < address.length; j++) {
+                if (("9ABCDEFGHIJKLMNOPQRSTUVWXYZ").indexOf(address.charAt(j)) < 0) {                            
+                    alert("Payment address should contain only letters A-Z or the number 9. Address is invalid.");                                        
+                    return false;
+                }
+            }                    
+
+            $('#loadingNew').show();
+            $('#loadingTextNew').show();	
+
+            // post data
+            $.ajax({
+                type: "POST",
+                url: '',
+                contentType: 'application/json',
+                data: JSON.stringify({                    
+                    'type': 'new',
+                    'account': account,
+                    'password1': password1,
+                    'password2': password2,
+                    'address': address
+                }),
+                success: function(res){
+                    $('#loadingNew').hide();
+                    $('#loadingTextNew').hide();	
+                    $('#createButton').hide();	
+                    $('#successMessageNew').show();	
+                },
+                error: function(){                    
+                    $('#loadingNew').hide();
+                    $('#loadingTextNew').hide();	
+                    $('#errorMessageNew').show();	
+                }
+            });
+
+            return false;
+            
+        });  	                                     
+
+        // handle the update button click
+        $("#updateButton").on( "click", function() {		
+                      
+             // get values
+            let account = $("#account").val();
+            let password1 = $("#password1").val();
+            let password2 = $("#password2").val();
+            let address = $("#address").val();
+            let recaptcha = $("#g-recaptcha-response").val();
+
+            // sanitize
+            account = filterXSS(account);
+            password1 = filterXSS(password1);
+            password2 = filterXSS(password2);
+            address = filterXSS(address);            
+
+            $('#loadingUpdate').hide();
+            $('#loadingTextUpdate').hide();	
+            $('#successMessageUpdate').hide();	
+            $('#errorMessageUpdate').hide();	            
+
+            // check account exists
+            if (!account) {
+                alert("Account is invalid. Please enter a value.");                                        
+                return false;
+            }
+
+            // validate the account length             
+            if (account.length === 27) {
+                // do nothing
+            } else {
+                alert("Account is invalid. Account should be 27 characters.");                                        
+                return false;
+            }
+
+            // validate the account content
+            for (var j = 0; j < account.length; j++) {
+                if (("9ABCDEFGHIJKLMNOPQRSTUVWXYZ").indexOf(account.charAt(j)) < 0) {                            
+                    alert("Account should contain only letters A-Z or the number 9. Account is invalid.");                                        
+                    return false;
+                }
+            }
+
+            // check password1 exists
+            if (!password1) {
+                alert("Password #1 is invalid. Please enter a value.");                                        
+                return false;
+            }
+
+            // validate the password1 length             
+            if (password1.length === 15) {
+                // do nothing
+            } else {
+                alert("Password #1 is invalid. Password should be 15 characters.");                                        
+                return false;
+            }            
+
+            // check password2 exists
+            if (!password2) {
+                alert("Password #2 is invalid. Please enter a value.");                                        
+                return false;
+            }
+
+            // validate the password2 length             
+            if (password2.length === 12) {
+                // do nothing
+            } else {
+                alert("Password #2 is invalid. Password should be 12 characters.");                                        
+                return false;
+            }            
+
+            // check coin address exists
+            if (!address) {
+                alert("Payment address is invalid. Please enter a value.");                                        
+                return false;
+            }
+
+            // validate the address length             
+            if ((address.length === 90) || (address.length === 81)) {
+                // do nothing
+            } else {
+                alert("Payment address is invalid. Addresses should be 90 characters.");                                        
+                return false;
+            }
+
+            // validate the address content
+            for (var j = 0; j < address.length; j++) {
+                if (("9ABCDEFGHIJKLMNOPQRSTUVWXYZ").indexOf(address.charAt(j)) < 0) {                            
+                    alert("Payment address should contain only letters A-Z or the number 9. Address is invalid.");                                        
+                    return false;
+                }
+            }                    
+
+            // check recaptcha has been set
+            if (!recaptcha) {
+                alert("Please make sure to pass the recaptcha to prevent bots.");                                        
+                return false;
+            }
+
+            $('#loadingUpdate').show();
+            $('#loadingTextUpdate').show();	
+
+            // post data
+            $.ajax({
+                type: "POST",
+                url: '',
+                contentType: 'application/json',
+                data: JSON.stringify({                    
+                    'type': 'update',
+                    'account': account,
+                    'password1': password1,
+                    'password2': password2,
+                    'address': address,
+                    'recaptcha': recaptcha
+                }),
+                success: function(res){
+                    $('#loadingUpdate').hide();
+                    $('#loadingTextUpdate').hide();	
+                    $('#updateButton').hide();	
+                    $('#successMessageUpdate').show();	
+                },
+                error: function(){                    
+                    $('#loadingUpdate').hide();
+                    $('#loadingTextUpdate').hide();	
+                    $('#errorMessageUpdate').show();	
+                }
+            });
+
+            return false;
+        });  	                                     
+
+        
+    });	
+
+    </script>
+	
+  </body>
+  
+</html>
