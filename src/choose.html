@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Dariota enables geolocation on the Tangle. You can read or write data at a specific location using latitude-longitude coordinates.">
+    <meta name="author" content="Dariota">
+
+    <title>Dariota: Choose Location</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->    
+    <link href="https://fonts.googleapis.com/css?family=Lato: 300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    
+    <!-- Custom styles for this template -->
+    <link href="css/landing-page.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/portfolio-item.css" rel="stylesheet">
+    <link href="css/modern-business.css" rel="stylesheet">
+    <link href="css/2-col-portfolio.css" rel="stylesheet">      
+    <link rel="icon" href="./img/fav.ico" />	
+
+    <!-- Captcha and Maps Style -->
+    <style>
+    .text-xs-center {text-align: center;}        
+    .g-recaptcha {display: inline-block;}
+    #map {height: 400px;width: 100%;}
+    #floating-panel {
+        position: absolute;
+        top: 10px;
+        left: 25%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+    }
+    </style>
+        
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+      <a class="navbar-brand" href="https://dariota.com/index.html">Dariota</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/crypto5000/dariota">Github</a>
+          </li>                    
+        </ul>
+      </div>
+    </nav>
+            
+    <!-- Page Content -->
+    <section class="content-section-a" style="padding-bottom:10px" id="createAccount">
+            
+        <div class="container">        
+                   
+            <div class="row text-center">
+            
+                <div class="col-lg-12">                    
+                    <h4 class="page-header">Get Latitude-Longitude Coordinates Using Geocode then Submit Form Below:</h4>
+                    <hr class="intro-divider">                                                                       
+                </div>
+                <div class="col-lg-12">                    
+                    <div id="floating-panel">
+                        <input id="address" type="textbox" value="" placeholder="Enter City (e.g New York)">
+                        <input id="submitGeocode" type="button" value="Geocode">
+                    </div>
+                    <div id="map">Loading Map...</div>
+                </div>
+                <script>
+                    var longitude = "";
+                    var latitude = "";
+                    function initMap() {                        
+                        var map = new google.maps.Map(document.getElementById('map'), {
+                            zoom: 8,
+                            center: {lat: 40.71315, lng: -74.00401}                            
+                        });
+                        var geocoder = new google.maps.Geocoder();
+                        document.getElementById('submitGeocode').addEventListener('click', function() {                            
+                            geocodeAddress(geocoder, map);
+                        });
+                    }
+                    function geocodeAddress(geocoder, resultsMap) {                        
+                        var address = document.getElementById('address').value;
+                        // sanitize address
+                        address = filterXSS(address);
+                        // validate address
+                        if (!address) {
+                            alert("Please enter an address in the geocode box to get latitude and longitude.");
+                            return false;
+                        }
+                        if ((address.length < 2) || (address.length > 350)) {
+                            alert("Please enter an address between 2 and 350 characters in the geocode box to get latitude and longitude.");
+                            return false;
+                        }
+                        geocoder.geocode({'address': address}, function(results, status) {
+                            if (status === 'OK') {                                
+                                resultsMap.setCenter(results[0].geometry.location);
+                                var marker = new google.maps.Marker({
+                                    map: resultsMap,
+                                    position: results[0].geometry.location
+                                });
+                                // get latitude and longitude
+                                latitude=results[0].geometry.location.lat();
+                                longitude=results[0].geometry.location.lng();
+                                // set the inputs
+                                $("#newLatitude").val(filterXSS(latitude));
+                                $("#newLongitude").val(filterXSS(longitude));
+                            } else {
+                                alert('Geocode failed because: ' + status + ". Try using Bing Maps below.");
+                            }
+                        });
+                    }
+                </script>                    
+                <div class="col-lg-12">           
+                    <form class="form-horizontal">
+                        <fieldset>
+                            <div class="form-group" style="padding-top:10px">                                        
+                                <label for="newLatitude">Latitude:</label>
+                                <div class="col-xs-10">
+                                    <input type="text" class="form-control" style="width:80%;margin: 0 auto;" id="newLatitude" value="" placeholder="Filled from Geocode Above...">
+                                </div>                                        
+                            </div>                                                
+                            <div class="form-group">                                        
+                                <label for="newLongitude">Longitude:</label>
+                                <div class="col-xs-10">
+                                    <input type="text" class="form-control" style="width:80%;margin: 0 auto;" id="newLongitude" value="" placeholder="Filled from Geocode Above...">
+                                </div>                                        
+                            </div>                                                
+                            <div class="form-group">
+                                <div class="col-xs-offset-2 col-xs-10" style="padding-bottom:5px">                                        
+                                    <button type="submit" class="btn btn-primary" style="width:80%;margin: 0 auto;" id="readButton">Read Data</button>
+                                </div>                            
+                                <div class="col-xs-offset-2 col-xs-10">                                                                                    
+                                    <button type="submit" class="btn btn-primary" style="width:80%;margin: 0 auto;padding-top:10px" id="writeButton">Write Data</button>                                                                            
+                                </div>                            
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>                        
+                <div class="col-lg-12">                                   
+                    <hr class="intro-divider">                                                                       
+                    <h4>Bing Maps: Geocoding Method</h4>                                                  
+                    <h6>Use Bing Map Search to get your desired location and then enter latitude and longitude in the inputs above.</h6>
+                    <input type="text" class="form-control" style="width:80%;margin: 0 auto;" id="cityName" val="" placeholder="New York City">                                                
+                    <button type="submit" class="btn btn-primary" style="width:80%;margin: 0 auto;" id="bingButton">Bing Map Search</button>                                                                                                    
+                </div>                        
+
+            </div>
+
+            <!-- /.row -->            
+        </div>      
+        <!-- /.container -->
+
+    </section>
+        
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper/popper.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>    
+    <script type="text/javascript" src="js/xss.js"></script>    
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap">
+    </script>
+    <!-- Page-Level Demo Scripts -->
+    <script>
+    $(document).ready(function() {        
+                
+        // handle the read button
+        $("#readButton").on( "click", function() {		
+
+            // sanitize html
+            latitude = filterXSS(latitude);            
+            longitude = filterXSS(longitude);            
+                
+            // check if field has value
+            if (!longitude) {            
+                alert("No longitude has been selected.");                                                        
+                return false;
+            }
+
+            // validate the length             
+            if ((longitude.length < 1) || (longitude.length > 20)) {                
+                alert("Invalid longitude has been selected.");                                        
+                return false;
+            }
+
+            // validate the content
+            for (var j = 0; j < longitude.length; j++) {
+                if (("01234567890.-").indexOf(longitude.charAt(j)) < 0) {                            
+                    alert("Invalid longitude has been selected.");                                        
+                    return false;
+                }
+            }
+            
+            // validate only 1 decimal point in string            
+            if ((longitude.match(/\./g) || []).length != 1) {
+                alert("Invalid longitude has been selected.");                                        
+                return false;
+            }
+
+            // validate at least 5 decimals - else add 000s
+            var decLon = longitude.indexOf("\.");
+            var lonLength = longitude.length;
+            var lonCheck = decLon + 5;
+            var lonLoop = 0;
+            if (lonCheck >= lonLength) {
+                lonCheck = lonCheck - lonLength;
+                // append the added decimals to equal 5 decimals
+                while (lonLoop <= lonCheck) {
+                    longitude = longitude + "0";
+                    lonLoop++;
+                }
+            }
+
+            // check if field has value
+            if (!latitude) {            
+                alert("No latitude has been selected.");                                                        
+                return false;
+            }
+
+            // validate the length             
+            if ((latitude.length < 1) || (latitude.length > 20)) {                
+                alert("Invalid latitude has been selected.");                                                        
+                return false;
+            }
+
+            // validate the content
+            for (var j = 0; j < latitude.length; j++) {
+                if (("01234567890.-").indexOf(latitude.charAt(j)) < 0) {                            
+                    alert("Invalid latitude has been selected.");                                                        
+                    return false;
+                }
+            }
+
+            // validate only 1 decimal point in string
+            if ((latitude.match(/\./g) || []).length != 1) {
+                alert("Invalid latitude has been selected.");                                                            
+                return false;
+            }
+
+            // validate at least 5 decimals - else add 000s
+            var decLat = latitude.indexOf("\.");
+            var latLength = latitude.length;
+            var latCheck = decLat + 5;
+            var latLoop = 0;
+            if (latCheck >= latLength) {
+                latCheck = latCheck - latLength;
+                // append the added decimals to equal 5 decimals
+                while (latLoop <= latCheck) {
+                    latitude = latitude + "0";
+                    latLoop++;
+                }
+            }
+            
+            // go to read            
+            let url = "https://dariota.com/read.html?q=" + latitude + "&r=" + longitude;
+            window.location.href = url;                        
+            return false;
+            
+        });  	                                     
+
+        // handle the write button
+        $("#writeButton").on( "click", function() {		
+
+            // sanitize html
+            latitude = filterXSS(latitude);            
+            longitude = filterXSS(longitude);            
+                
+            // check if field has value
+            if (!longitude) {            
+                alert("No longitude has been selected.");                                                        
+                return false;
+            }
+
+            // validate the length             
+            if ((longitude.length < 1) || (longitude.length > 20)) {                
+                alert("Invalid longitude has been selected.");                                        
+                return false;
+            }
+
+            // validate the content
+            for (var j = 0; j < longitude.length; j++) {
+                if (("01234567890.-").indexOf(longitude.charAt(j)) < 0) {                            
+                    alert("Invalid longitude has been selected.");                                        
+                    return false;
+                }
+            }
+
+            // validate only 1 decimal point in string            
+            if ((longitude.match(/\./g) || []).length != 1) {
+                alert("Invalid longitude has been selected.");                                        
+                return false;
+            }
+
+            // validate at least 5 decimals - else add 000s
+            var decLon = longitude.indexOf("\.");
+            var lonLength = longitude.length;
+            var lonCheck = decLon + 5;
+            var lonLoop = 0;
+            if (lonCheck >= lonLength) {
+                lonCheck = lonCheck - lonLength;
+                // append the added decimals to equal 5 decimals
+                while (lonLoop <= lonCheck) {
+                    longitude = longitude + "0";
+                    lonLoop++;
+                }
+            }
+
+            // check if field has value
+            if (!latitude) {            
+                alert("No latitude has been selected.");                                                        
+                return false;
+            }
+
+            // validate the length             
+            if ((latitude.length < 1) || (latitude.length > 20)) {                
+                alert("Invalid latitude has been selected.");                                                        
+                return false;
+            }
+
+            // validate the content
+            for (var j = 0; j < latitude.length; j++) {
+                if (("01234567890.-").indexOf(latitude.charAt(j)) < 0) {                            
+                    alert("Invalid latitude has been selected.");                                                        
+                    return false;
+                }
+            }
+
+            // validate only 1 decimal point in string
+            if ((latitude.match(/\./g) || []).length != 1) {
+                alert("Invalid latitude has been selected.");                                                            
+                return false;
+            }
+
+            // validate at least 5 decimals - else add 000s
+            var decLat = latitude.indexOf("\.");
+            var latLength = latitude.length;
+            var latCheck = decLat + 5;
+            var latLoop = 0;
+            if (latCheck >= latLength) {
+                latCheck = latCheck - latLength;
+                // append the added decimals to equal 5 decimals
+                while (latLoop <= latCheck) {
+                    latitude = latitude + "0";
+                    latLoop++;
+                }
+            }
+
+            // go to write
+            let url = "https://dariota.com/write.html?q=" + latitude + "&r=" + longitude;
+            window.location.href = url;                        
+            return false;
+
+        });  	
+
+        // handle the bing maps button click
+        $("#bingButton").on( "click", function() {		
+                      
+             // get city
+            let cityName = $("#cityName").val();
+            
+            // sanitize
+            cityName = filterXSS(cityName);
+
+            // replace spaces with pluses
+            cityName = cityName.replace(/ /g,"\+");
+
+            // check if field has value
+            if (!cityName) {            
+                alert("Please enter a city name to search.");                                                        
+                return false;
+            }
+
+            // validate the length             
+            if ((cityName.length < 1) || (cityName.length > 50)) {                
+                alert("Please enter a city name between 1 and 50 characters.");                                                        
+                return false;
+            }
+            
+            // go to write
+            let url = "https://www.bing.com/search?q=latitude+longitude+" + cityName;
+            window.location.href = url;                        
+
+            return false;
+                        
+        });  	                                     
+
+        
+    });	
+
+    </script>
+	
+  </body>
+  
+</html>
