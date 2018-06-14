@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Dariota enables geolocation on the Tangle. You can read or write data at a specific location using latitude-longitude coordinates.">
+    <meta name="author" content="Dariotas">
+
+    <title>Dariota: Decentralized Augmented Reality with IOTA</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato: 300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="css/landing-page.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/portfolio-item.css" rel="stylesheet">
+    <link href="css/modern-business.css" rel="stylesheet">
+    <link href="css/2-col-portfolio.css" rel="stylesheet">      
+    <link rel="icon" href="./img/fav.ico" />	
+    
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+      <a class="navbar-brand" href="#">Dariota</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/crypto5000/dariota">Github</a>
+          </li>          
+          <li class="nav-item">
+            <a class="nav-link" href="#features">Features</a>
+          </li>          
+          <li class="nav-item">
+            <a class="nav-link" href="#demo">Demo</a>
+          </li>          
+          <li class="nav-item">
+            <a class="nav-link" href="https://dariota.com/account.html">Accounts</a>
+          </li>          
+          <li class="nav-item">
+            <a class="nav-link" href="#faq">FAQ</a>
+          </li>          
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="intro-header">
+      <div class="container">
+        <div class="intro-message">
+          <br><br>          
+          <h2 style="padding-bottom:10px;">Dariota Connects the Tangle with GPS/geolocation.</h2>                              
+          <hr class="intro-divider">                    
+          <h3 style="padding-bottom:10px;">Read and Write Data at a Location Near You.</h3>                              
+          <ul class="list-inline intro-social-buttons" id="mainButtons">            
+            <div class="form-group row">                                                
+                <div class="col-lg-12">                                     
+                    <button type="submit" class="btn btn-primary" id="readButton" style="border-style:solid;border-color: #ffffff;width:100%;"><h3 style="margin-top:5px;">Read Data</h3></button><br>                                                                                                        
+                    <button type="submit" class="btn btn-primary" id="writeButton" style="border-style:solid;border-color: #ffffff;width:100%;margin-top:10px"><h3 style="margin-top:5px;">Write Data</h3></button><br>                                                                                                                
+                </div>
+            </div>                                                
+          </ul>                                        
+          <h5 style="padding-bottom:10px;text-decoration:underline" id="chooseButton">Change Location for Read/Write.</h5>                              
+        </div>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <section class="content-section-a" style="padding-bottom:20px" id="howitworks">
+
+      <div class="container">                       
+
+        <!-- Item Row -->
+        <div class="row">          
+          <div class="col-md-8">
+              <h4 style="padding-left:5px">Pin Data to Locations</h4> 
+              <img class="img-responsive" style='width:100%;padding-bottom:10px' src="https://dariota.com/img/iotamap.jpg" alt="Dariota Map">
+          </div>
+
+          <div class="col-md-4">
+              <h4 style="padding-left:5px">How it Works</h4>
+              <p style="padding-left:5px">Dariota maps latitude and longitude coordinates to IOTA addresses. This means Dariota data stored in the Tangle can be queried using a GPS or html5 location api. Additional metadata (like message type, time expiration and payout address) can also be stored inside the Dariota transaction. This broadens the utility of the overall system. For complete details, see the github repo specification.</p>              
+              <h4 style="padding-left:5px">Use Cases</h4>
+              <ul>
+                  <li>Chat Messages at a Location</li>
+                  <li>Virtual Tours with Pinned Facts</li>                    			
+                  <li>Supply Chain Tracking of Products</li>
+                  <li>Yelp-Like Reviews of Businesses</li>                  
+                  <li>Real Estate Info about Houses</li>
+                  <li>AR Games Like Pokemon Go</li>
+                  <li>Traffic or Accident Information</li>                  
+                  <li>Fleet Management Tracking</li>
+                  <li>Location Based-Advertising</li>
+                  <li>Yard Sale Item Descriptions</li>										
+                  <li>AirBnb-Like Reviews of Hosts</li>                  
+                  <li>Meetups and Networking Events</li>                  
+                  <li>Many More. Use Your Imagination</li>
+              </ul>
+          </div>
+
+        </div>
+      
+        <!-- /.row -->
+      </div>
+      
+    </section>
+    
+    <!-- Page Content -->
+    <section class="content-section-a" style="padding-bottom:20px" id="demo">
+
+        <div class="container">                
+                  
+          <!-- Item Row -->
+          <div class="row text-center">
+              
+            <div class="col-md-6">
+              <h4 style="padding-left:5px">Read Data Demo:</h4>
+              <img class="img-responsive" style='width:100%;' src="https://dariota.com/img/readdemo.gif" alt="Read Demo">
+            </div>
+            <div class="col-md-6">
+              <h4 style="padding-left:5px">Write Data Demo:</h4>
+              <img class="img-responsive" style='width:100%;' src="https://dariota.com/img/writedemo1.gif" alt="Write Demo">
+            </div>
+  
+          </div>
+        
+          <!-- /.row -->
+        </div>
+        <!-- /.container -->
+      
+    </section>
+    
+    <!-- Page Content -->
+    <section class="content-section-a" style="padding-bottom:0px" id="features">
+
+      <div class="container">        
+          <div class="row text-center">
+              <div class="col-md-4">
+                  <span class="fa-stack fa-4x">
+                      <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                      <i class="fa fa-money fa-stack-1x fa-inverse"></i>
+                  </span>
+                  <h4 class="service-heading">Payments</h4>
+                  <p class="text-muted">Get paid for your data by attaching a payment account. For example, post a traffic accident and people can pay for your helpful data.</p>
+              </div>
+              <div class="col-md-4">
+                  <span class="fa-stack fa-4x">
+                      <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                      <i class="fa fa-drivers-license-o fa-stack-1x fa-inverse"></i>
+                  </span>
+                  <h4 class="service-heading">Accounts</h4>
+                  <p class="text-muted">Accounts are optional and guard against IOTA address reuse. If you don't want an account, you can still include a payment address.</p>
+              </div>
+              <div class="col-md-4">
+                  <span class="fa-stack fa-4x">
+                      <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                      <i class="fa fa-filter fa-stack-1x fa-inverse"></i>
+                  </span>
+                  <h4 class="service-heading">Filters</h4>
+                  <p class="text-muted">When reading data, you can filter the displayed results by factors like geographic radius, message type, and time expiration.</p>
+              </div>
+          </div>        
+          <div class="row text-center">
+              <div class="col-md-4">
+                  <span class="fa-stack fa-4x">
+                      <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                      <i class="fa fa-briefcase fa-stack-1x fa-inverse"></i>
+                  </span>
+                  <h4 class="service-heading">Storage</h4>
+                  <p class="text-muted">[Experimental]. You can pay to have any posted data stored for a certain time period to prevent snapshot deletion.</p>
+              </div>
+              <div class="col-md-4">
+                  <span class="fa-stack fa-4x">
+                      <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                      <i class="fa fa-check-circle-o fa-stack-1x fa-inverse"></i>
+                  </span>
+                  <h4 class="service-heading">Voting</h4>
+                  <p class="text-muted">Posted data can be upvoted. This provides another measure of quality and a possible future filtering criteria.</p>
+              </div>
+              <div class="col-md-4">
+                  <span class="fa-stack fa-4x">
+                      <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                      <i class="fa fa-reply-all fa-stack-1x fa-inverse"></i>
+                  </span>
+                  <h4 class="service-heading">Replies</h4>
+                  <p class="text-muted">You can view replies to a posted data point. This is particularly important for chat messages or questions.</p>
+              </div>
+          </div>                  
+      </div>      
+      <!-- /.container -->
+
+    </section>
+      
+    <!-- Page Content -->
+    <section class="content-section-a" style="padding-bottom:20px" id="faq">
+            
+        <div class="container">        
+            <hr class="intro-divider">          
+            <div class="row text-center">
+            
+                <div class="col-lg-12">
+                    <h3 class="page-header">Frequently Asked Questions:</h3>
+                    <hr class="faq-divider">          
+                    <p>Question: What is Dariota?</p> 
+                    <p>Answer: Dariota enables geolocation on the Tangle. You can read or write data at a specific location using latitude-longitude coordinates.</p>
+                    <hr class="faq-divider">          
+                    <p>Question: What does Dariota stand for?</p> 
+                    <p>Answer: "D"ecentralized "A"ugmented "R"eality with "IOTA".</p>
+                    <hr class="faq-divider">         
+                    <p>Question: Why are there no results at my location?</p> 
+                    <p>Answer: No one has posted data within the geographic radius of your search.</p>                                    
+                    <hr class="faq-divider">         
+                    <p>Question: What result set is available at my location?</p> 
+                    <p>Answer: Only results within the size of a small city (or about 11km<sup>2</sup>) are returned.</p>                                    
+                    <hr class="faq-divider">         
+                    <p>Question: Can I change my location?</p> 
+                    <p>Answer: Yes. Just change the latitude-longitude coordinates used by Dariota.</p>                                                        
+                    <hr class="faq-divider">                             
+                    <p>Question: Can I query all IOTA data (not just Dariota data) in the Tangle for geolocation?</p> 
+                    <p>Answer: Only data that has been posted in the Dariota format can be queried. So a generic payment transfer is outside of Dariota and won't be returned.</p>                                                        
+                    <hr class="faq-divider">                                                 
+                    <p>Question: How do I hook up Dariota to my GPS system?</p> 
+                    <p>Answer: The easiest way is to use the GPS in a smartphone. Dariota just requires latitude-longitude coordinates and the internet, so if you can output these coordinates, you can use Dariota.</p>                                                        
+                    <hr class="faq-divider">          
+                    <p>Question: Can I get paid for posting data?</p> 
+                    <p>Answer: Yes. But only if someone finds your data valuable enough to pay you. You may get paid nothing.</p>                                                        
+                    <hr class="faq-divider">          
+                    <p>Question: What's the best way to get paid for my data?</p> 
+                    <p>Answer: Try different things. You can offer some data for free and include a message that if people pay, you'll provide more. You can encrypt the data and include a message saying you'll post the decrypted data if people pay. Etc.</p>                                                        
+                    <hr class="faq-divider">          
+                    <p>Question: Do I have to pay to read data?</p> 
+                    <p>Answer: No. The data is publicly available in the Tangle for anyone to read or use.</p>                                                        
+                    <hr class="faq-divider">                              
+                    <p>Question: What happens to the data during a snapshot?</p> 
+                    <p>Answer: Data gets deleted. Dariota has an experimental pay-for-storage feature that can keep items through snapshots. Currently, this feature is just for a certain period of storage. It's not forever.</p>                                                        
+                    <hr class="faq-divider">          
+                    <p>Question: Can I store data myself?</p> 
+                    <p>Answer: Not through the current Dariota interface. You could, however, replicate the data yourself from the Tangle.</p>                                                        
+                    <hr class="faq-divider">          
+                    <p>Question: I posted data and don't see it in the results?</p> 
+                    <p>Answer: If you've waited 10 minutes and your data is not in the Tangle, try reposting. There may have been an error during the transaction.</p>                                                        
+                    <hr class="faq-divider">          
+                    <p>Question: How long does it take to see my data in the Tangle?</p> 
+                    <p>Answer: It takes up to 10 minutes because Proof of Work is required. Data is not instantly available.</p>                                                                            
+                    <hr class="faq-divider">          
+                    <p>Question: Do I have to create an account?</p> 
+                    <p>Answer: No. It's optional.</p>                  
+                    <hr class="faq-divider">                              
+                    <p>Question: What if I don't include an account or payment address?</p> 
+                    <p>Answer: That's your choice. If so, a Dariota account will be used instead to help support the cost of running Dariota.</p>                  
+                    <hr class="faq-divider">         
+                    <p>Question: How long does it take for my account to be active?</p> 
+                    <p>Answer: It can take up to 24 hours. It's not instantaneous. So if you need immediate payment, include an IOTA address with the transaction to override the account.</p>                  
+                    <hr class="faq-divider">         
+                    <p>Question: Can I develop software on top of Dariota?</p> 
+                    <p>Answer: Yes. The data is in the Tangle and can be used by other developers to create their own mapping applications.</p>                                                                                                
+                    <hr class="faq-divider">                              
+                    <p>Question: Is the code open source?</p> 
+                    <p>Answer: Yes. It's on github <a href="https://www.github.com/crypto5000/dariota">here</a>.</p>                                                        
+                    <hr class="faq-divider">                              
+                    <p>Question: What coins are supported?</p> 
+                    <p>Answer: Currently, just IOTA.</p>
+                </div>
+                
+            </div>            
+            <!-- /.row -->            
+    
+        </div>    
+        
+    </section>
+    <!-- /.container -->
+        
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper/popper.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>    
+    <script type="text/javascript" src="js/xss.js"></script>
+    
+    <!-- Page-Level Demo Scripts -->
+    <script>
+    $(document).ready(function() {        
+              
+        // handle the read button
+        $("#readButton").on( "click", function() {		
+
+            // check for geolocation support
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition,showError);
+            } else {
+                alert("Automated geolocation is not supported by this browser. Try using the CHANGE LOCATION link to select your location.")
+            }
+
+            function showPosition(position) {
+
+                // set the latitude and longitude
+                latitude = position.coords.latitude; 
+                longitude = position.coords.longitude; 
+            
+                // sanitize html
+                latitude = filterXSS(latitude);            
+                longitude = filterXSS(longitude);            
+                    
+                // check if field has value
+                if (!longitude) {            
+                    alert("No longitude has been selected. Try using the CHANGE LOCATION link to select your location.")
+                    return false;
+                }
+
+                // validate the length             
+                if ((longitude.length < 1) || (longitude.length > 20)) {                
+                    alert("No longitude has been selected. Try using the CHANGE LOCATION link to select your location.")
+                    return false;
+                }
+
+                // validate the content
+                for (var j = 0; j < longitude.length; j++) {
+                    if (("01234567890.-").indexOf(longitude.charAt(j)) < 0) {                            
+                        alert("No longitude has been selected. Try using the CHANGE LOCATION link to select your location.")
+                        return false;
+                    }
+                }
+
+                // validate only 1 decimal point in string            
+                if ((longitude.match(/\./g) || []).length != 1) {
+                    alert("No longitude has been selected. Try using the CHANGE LOCATION link to select your location.")
+                    return false;
+                }
+
+                // validate at least 5 decimals - else add 000s
+                var decLon = longitude.indexOf("\.");
+                var lonLength = longitude.length;
+                var lonCheck = decLon + 5;
+                var lonLoop = 0;
+                if (lonCheck >= lonLength) {
+                    lonCheck = lonCheck - lonLength;
+                    // append the added decimals to equal 5 decimals
+                    while (lonLoop <= lonCheck) {
+                        longitude = longitude + "0";
+                        lonLoop++;
+                    }
+                }
+
+                // check if field has value
+                if (!latitude) {            
+                    alert("No latitude has been selected. Try using the CHANGE LOCATION link to select your location.")
+                    return false;
+                }
+
+                // validate the length             
+                if ((latitude.length < 1) || (latitude.length > 20)) {                
+                    alert("No latitude has been selected. Try using the CHANGE LOCATION link to select your location.")
+                    return false;
+                }
+
+                // validate the content
+                for (var j = 0; j < latitude.length; j++) {
+                    if (("01234567890.-").indexOf(latitude.charAt(j)) < 0) {                            
+                        alert("No latitude has been selected. Try using the CHANGE LOCATION link to select your location.")
+                        return false;
+                    }
+                }
+
+                // validate only 1 decimal point in string
+                if ((latitude.match(/\./g) || []).length != 1) {
+                    alert("No latitude has been selected. Try using the CHANGE LOCATION link to select your location.")
+                    return false;
+                }
+
+                // validate at least 5 decimals - else add 000s
+                var decLat = latitude.indexOf("\.");
+                var latLength = latitude.length;
+                var latCheck = decLat + 5;
+                var latLoop = 0;
+                if (latCheck >= latLength) {
+                    latCheck = latCheck - latLength;
+                    // append the added decimals to equal 5 decimals
+                    while (latLoop <= latCheck) {
+                        latitude = latitude + "0";
+                        latLoop++;
+                    }
+                }
+
+                // go to read            
+                let url = "https://dariota.com/read.html?q=" + latitude + "&r=" + longitude;
+                window.location.href = url;                        
+                return false;
+            }
+
+            // handle any errors
+            function showError(error) {
+                switch(error.code) {
+                    case error.PERMISSION_DENIED:
+                        alert("You denied Dariota permission to access your location. Try using the CHANGE LOCATION link to manually select your location.");
+                        break;
+                    case error.POSITION_UNAVAILABLE:                        
+                        alert("No latitude-longitude available at your location. Try using the CHANGE LOCATION link to manually select your location.");
+                        break;
+                    case error.TIMEOUT:
+                        alert("The request timed out to get your location. Try using the CHANGE LOCATION link to manually select your location.");
+                        break;
+                    case error.UNKNOWN_ERROR:
+                        alert("There was a problem getting your location. Try using the CHANGE LOCATION link to manually select your location.");
+                        break;
+                }
+            }
+
+        });  	                                     
+        
+        // handle the write button
+        $("#writeButton").on( "click", function() {		
+
+            // check for geolocation support
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition,showError);
+            } else {
+                alert("Automated geolocation is not supported by this browser. Try using the CHANGE LOCATION link to select your location.")
+            }
+
+            function showPosition(position) {
+
+                // set the latitude and longitude
+                latitude = position.coords.latitude; 
+                longitude = position.coords.longitude; 
+
+                // sanitize html
+                latitude = filterXSS(latitude);            
+                longitude = filterXSS(longitude);            
+                    
+                // check if field has value
+                if (!longitude) {            
+                    alert("No longitude has been selected. Try using the CHANGE LOCATION link to select your location.")
+                    return false;
+                }
+
+                // validate the length             
+                if ((longitude.length < 1) || (longitude.length > 20)) {                
+                    alert("No longitude has been selected. Try using the CHANGE LOCATION link to select your location.")
+                    return false;
+                }
+
+                // validate the content
+                for (var j = 0; j < longitude.length; j++) {
+                    if (("01234567890.-").indexOf(longitude.charAt(j)) < 0) {                            
+                        alert("No longitude has been selected. Try using the CHANGE LOCATION link to select your location.")
+                        return false;
+                    }
+                }
+
+                // validate only 1 decimal point in string            
+                if ((longitude.match(/\./g) || []).length != 1) {
+                    alert("No longitude has been selected. Try using the CHANGE LOCATION link to select your location.")
+                    return false;
+                }
+
+                // validate at least 5 decimals - else add 000s
+                var decLon = longitude.indexOf("\.");
+                var lonLength = longitude.length;
+                var lonCheck = decLon + 5;
+                var lonLoop = 0;
+                if (lonCheck >= lonLength) {
+                    lonCheck = lonCheck - lonLength;
+                    // append the added decimals to equal 5 decimals
+                    while (lonLoop <= lonCheck) {
+                        longitude = longitude + "0";
+                        lonLoop++;
+                    }
+                }
+
+                // check if field has value
+                if (!latitude) {            
+                    alert("No latitude has been selected. Try using the CHANGE LOCATION link to select your location.")
+                    return false;
+                }
+
+                // validate the length             
+                if ((latitude.length < 1) || (latitude.length > 20)) {                
+                    alert("No latitude has been selected. Try using the CHANGE LOCATION link to select your location.")
+                    return false;
+                }
+
+                // validate the content
+                for (var j = 0; j < latitude.length; j++) {
+                    if (("01234567890.-").indexOf(latitude.charAt(j)) < 0) {                            
+                        alert("No latitude has been selected. Try using the CHANGE LOCATION link to select your location.")
+                        return false;
+                    }
+                }
+
+                // validate only 1 decimal point in string
+                if ((latitude.match(/\./g) || []).length != 1) {
+                    alert("No latitude has been selected. Try using the CHANGE LOCATION link to select your location.")
+                    return false;
+                }
+
+                // validate at least 5 decimals - else add 000s
+                var decLat = latitude.indexOf("\.");
+                var latLength = latitude.length;
+                var latCheck = decLat + 5;
+                var latLoop = 0;
+                if (latCheck >= latLength) {
+                    latCheck = latCheck - latLength;
+                    // append the added decimals to equal 5 decimals
+                    while (latLoop <= latCheck) {
+                        latitude = latitude + "0";
+                        latLoop++;
+                    }
+                }
+
+                // go to write
+                let url = "https://dariota.com/write.html?q=" + latitude + "&r=" + longitude;
+                window.location.href = url;                        
+                return false;
+            }
+
+            // handle any errors
+            function showError(error) {
+                switch(error.code) {
+                    case error.PERMISSION_DENIED:
+                        alert("You denied Dariota permission to access your location. Try using the CHANGE LOCATION link to manually select your location.");
+                        break;
+                    case error.POSITION_UNAVAILABLE:                        
+                        alert("No latitude-longitude available at your location. Try using the CHANGE LOCATION link to manually select your location.");
+                        break;
+                    case error.TIMEOUT:
+                        alert("The request timed out to get your location. Try using the CHANGE LOCATION link to manually select your location.");
+                        break;
+                    case error.UNKNOWN_ERROR:
+                        alert("There was a problem getting your location. Try using the CHANGE LOCATION link to manually select your location.");
+                        break;
+                }
+            }
+
+        });  	        
+
+        // handle the choose location
+        $("#chooseButton").on( "click", function() {		
+                                
+            // go to choose
+            let url = "https://dariota.com/choose.html";
+            window.location.href = url;                        
+
+            return false;
+                        
+        });  	                                     
+        
+    });	
+
+    </script>
+	
+  </body>
+  
+</html>
