@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Dariota enables geolocation on the Tangle. You can read or write data at a specific location using latitude-longitude coordinates.">
+    <meta name="author" content="Dariota">
+
+    <title>Dariota: Write Data to a Location</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->    
+    <link href="https://fonts.googleapis.com/css?family=Lato: 300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Date Picker -->
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css"/>                
+
+    <!-- Custom styles for this template -->
+    <link href="css/landing-page.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/portfolio-item.css" rel="stylesheet">
+    <link href="css/modern-business.css" rel="stylesheet">
+    <link href="css/2-col-portfolio.css" rel="stylesheet">      
+    <link rel="icon" href="./img/fav.ico" />	
+
+    <!-- Captcha Style -->
+    <style>
+    .text-xs-center {text-align: center;}        
+    .g-recaptcha {display: inline-block;}
+    </style>
+
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+      <a class="navbar-brand" href="https://dariota.com/index.html">Dariota</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/crypto5000/dariota">Github</a>
+          </li>                    
+        </ul>
+      </div>
+    </nav>
+            
+    <!-- Page Content -->
+    <section class="content-section-a" style="padding-bottom:10px" id="writeData">
+            
+        <div class="container">        
+                   
+            <div class="row text-center">
+            
+                <div class="col-lg-12">                                        
+                    <h4>Write Data to Location:</h4>                                                  
+                    <input type="text" class="form-control" style="width:80%;margin: 0 auto;" id="latitude" val="" disabled>
+                    <input type="text" class="form-control" style="width:80%;margin: 0 auto;" id="longitude" val="" disabled>
+                    <a href="https://dariota.com/choose.html">Change Location</a>
+                    <hr class="intro-divider">                                                                       
+                </div>
+                <div class="col-lg-12">           
+                    <form class="form-horizontal">
+                        <fieldset>
+                            <div class="form-group">                                        
+                                <label for="dataType">Data Type:</label>
+                                <div class="col-xs-10">                                    
+                                    <select class="form-control" style="width:80%;margin: 0 auto;" id="dataType">
+                                        <option value="CHAT" selected>Chat</option>
+                                        <option value="FACT">Fact</option>
+                                        <option value="ITEM">Item</option>
+                                        <option value="REVI">Review</option>
+                                        <option value="SERV">Service</option>
+                                    </select>
+                                </div>                                        
+                            </div>                    
+                            <div class="form-group">                                        
+                                <label for="dataText">Data Text:</label>
+                                <div class="col-xs-10">                                    
+                                    <textarea class="form-control" style="width:80%;margin: 0 auto;" id="dataText" rows="4">                                            
+                                    </textarea>
+                                </div>                                        
+                            </div>                    
+                            <div class="form-group">                                                                            
+                                    <div class="col-xs-10">
+                                        <button type="submit" class="btn btn-primary" style="background-color:black" id="toggleExpiration">Add Expiration</button>                                        
+                                        <button type="submit" class="btn btn-primary" style="background-color:black" id="toggleAccount">Add Payment Info</button>                                        
+                                    </div>                                        
+                                </div>                    
+                            <div class="form-group" id="expiration" style="display:none">                                        
+                                <label for="dataExpiration">Date when Data Expires:</label>
+                                <div class="col-xs-10">
+                                     <input type="text" placeholder=" Show Date Picker" style="width:80%;margin: 0 auto;" id="pickyDate"/>
+                                </div>                                        
+                            </div>  
+                            <div class="form-group" id="account" style="display:none">                                        
+                                <label for="dataExpiration">Add Payment Account or Address: (<a href="./account.html">No Account?</a>)</label>                                
+                                <div class="col-xs-10">
+                                        <input type="text" placeholder=" 27 Character Account" style="width:80%;margin: 0 auto;" id="dataAccount"/>
+                                        <input type="text" placeholder=" IOTA Address (Optional)" style="width:80%;margin: 0 auto;" id="dataAddress"/>
+                                </div>                                        
+                                <h6>* Accounts are recommended to prevent IOTA address re-use.</h6>
+                            </div>                              
+                            <div class="form-group text-xs-center">                                                                                        
+                                <div class="g-recaptcha" data-sitekey=""></div>                                                  
+                            </div>                                                                                            
+                            <div class="form-group">
+                                <div class="col-xs-offset-2 col-xs-10">
+                                    <button type="submit" class="btn btn-primary" style="width:80%;margin: 0 auto;" id="writeButton">Send to Tangle</button>                                        
+                                    <img id="loadingUpdate" src="./img/loading.gif" alt="loading" height="40" width="40" style="display:none">&nbsp;&nbsp;&nbsp;<div id="loadingTextUpdate" style="display:none">Please Wait. Sending.</div>                    
+                                    <p class="alert alert-success" role="alert" id="successMessageUpdate" style="display:none">Your data is queued for Tangle processing and should be available in 3 minutes.</p>                              
+                                    <p class="alert alert-danger" role="alert" id="errorMessageUpdate" style="display:none">There was a problem uploading the data. Try again later.</p>                              
+                                </div>                            
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>                        
+
+            </div>
+
+            <!-- /.row -->            
+        </div>      
+        <!-- /.container -->
+
+    </section>
+        
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper/popper.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>    
+    <script src="js/bootstrap-datepicker.min.js"></script>    
+    <script type="text/javascript" src="js/xss.js"></script>
+    
+    <!-- Page-Level Demo Scripts -->
+    <script>
+    $(document).ready(function() {        
+
+        // set the default Dariota payment account
+        var defaultAccount = "AAAAAAAAAAAAAAAAAAAAAAAAAAA";
+
+        // get the latitude and longitude        
+        var latitude = "";
+        var longitude = "";
+        var url_string = window.location.href
+        var urlNew = new URL(url_string);
+        latitude = urlNew.searchParams.get("q");    
+        longitude = urlNew.searchParams.get("r");            
+
+        // sanitize html
+        latitude = filterXSS(latitude);            
+        longitude = filterXSS(longitude);            
+            
+        // check if field has value
+        if (!longitude) {            
+            alert("No location has been selected.");                                        
+            // go to choose page
+            let url = "https://dariota.com/choose.html";
+            window.location.href = url;            
+            return false;
+        }
+
+        // validate the length             
+        if ((longitude.length < 1) || (longitude.length > 20)) {                
+            alert("Invalid location has been selected.");                                        
+            // go to choose page
+            let url = "https://dariota.com/choose.html";
+            window.location.href = url;                                            
+            return false;
+        }
+
+        // validate the content
+        for (var j = 0; j < longitude.length; j++) {
+            if (("01234567890.-").indexOf(longitude.charAt(j)) < 0) {                            
+                alert("Invalid location has been selected.");                                        
+                // go to choose page
+                let url = "https://dariota.com/choose.html";
+                window.location.href = url;                            
+                return false;
+            }
+        }
+        
+        // validate only 1 decimal point in string            
+        if ((longitude.match(/\./g) || []).length != 1) {
+            alert("Invalid location has been selected.");                                        
+                // go to choose page
+                let url = "https://dariota.com/choose.html";
+                window.location.href = url;                            
+                return false;
+        }
+
+        // validate at least 5 decimals - else add 000s
+        var decLon = longitude.indexOf("\.");
+        var lonLength = longitude.length;
+        var lonCheck = decLon + 5;
+        var lonLoop = 0;
+        if (lonCheck >= lonLength) {
+            lonCheck = lonCheck - lonLength;
+            // append the added decimals to equal 5 decimals
+            while (lonLoop <= lonCheck) {
+                longitude = longitude + "0";
+                lonLoop++;
+            }
+        }
+
+        // check if field has value
+        if (!latitude) {            
+            alert("No location has been selected.");                                        
+            // go to choose page
+            let url = "https://dariota.com/choose.html";
+            window.location.href = url;            
+            return false;
+        }
+
+        // validate the length             
+        if ((latitude.length < 1) || (latitude.length > 20)) {                
+            alert("Invalid location has been selected.");                                        
+            // go to choose page
+            let url = "https://dariota.com/choose.html";
+            window.location.href = url;                                            
+            return false;
+        }
+
+        // validate the content
+        for (var j = 0; j < latitude.length; j++) {
+            if (("01234567890.-").indexOf(latitude.charAt(j)) < 0) {                            
+                alert("Invalid location has been selected.");                                        
+                // go to choose page
+                let url = "https://dariota.com/choose.html";
+                window.location.href = url;                            
+                return false;
+            }
+        }
+
+        // validate only 1 decimal point in string
+        if ((latitude.match(/\./g) || []).length != 1) {
+            alert("Invalid location has been selected.");                                        
+                // go to choose page
+                let url = "https://dariota.com/choose.html";
+                window.location.href = url;                            
+                return false;
+        }
+
+        // validate at least 5 decimals - else add 000s
+        var decLat = latitude.indexOf("\.");
+        var latLength = latitude.length;
+        var latCheck = decLat + 5;
+        var latLoop = 0;
+        if (latCheck >= latLength) {
+            latCheck = latCheck - latLength;
+            // append the added decimals to equal 5 decimals
+            while (latLoop <= latCheck) {
+                latitude = latitude + "0";
+                latLoop++;
+            }
+        }
+
+        // set the location
+        $('#latitude').val("Latitude: " + latitude);
+        $('#longitude').val("Longitude: " + longitude);                    
+
+        $('#pickyDate').datepicker({
+            format: "mm-dd-yyyy"
+        });
+        
+        // handle the expiration toggle
+        $("#toggleExpiration").on( "click", function() {		
+            $("#expiration").toggle();
+            return false;
+        });
+
+        // handle the account toggle
+        $("#toggleAccount").on( "click", function() {		
+            $("#account").toggle();
+            return false;
+        });
+
+        // create a new tag
+        var newTag = generateTag();
+
+        function generateTag() {
+              const validChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ9';
+              return Array.from(new Array(27), (x, i) => validChars[Math.floor(Math.random() * validChars.length)]).join('');
+        }            
+
+        // handle the write button click
+        $("#writeButton").on( "click", function() {		
+
+             // get values
+            let dataType = $("#dataType").val();
+            let dataText = $("#dataText").val();
+            let dataExpiration = $("#pickyDate").val();
+            let dataAccount = $("#dataAccount").val();
+            let dataAddress = $("#dataAddress").val();
+            let recaptcha = $("#g-recaptcha-response").val();
+
+            // sanitize
+            dataType = filterXSS(dataType);
+            dataText = filterXSS(dataText);
+            dataExpiration = filterXSS(dataExpiration);
+            dataAccount = filterXSS(dataAccount);
+            dataAddress = filterXSS(dataAddress);          
+            recaptcha = filterXSS(recaptcha);            
+
+            $('#loadingUpdate').hide();
+            $('#loadingTextUpdate').hide();	
+            $('#successMessageUpdate').hide();	
+            $('#errorMessageUpdate').hide();	            
+
+            // validate type
+            if ((dataType == "CHAT") || (dataType == "FACT") || (dataType == "ITEM") || (dataType == "REVI") || (dataType == "SERV")) {
+                // do nothing
+            } else {
+                alert("Data type is invalid. Please make a valid selection.");                                        
+                return false;
+            }
+
+            // validate text exists
+            if (!dataText) {
+                alert("Data text is invalid. Please enter some data.");                                        
+                return false;
+            }
+
+            // trim white space from dataText
+            dataText = dataText.trim();
+
+            // validate text length
+            if ((dataText.length < 2) || (dataText.length > 1800)) {
+                alert("Data text length is invalid. Please enter between 2 and 1800 characters.");                                        
+                return false;
+            }
+
+            // remove any "|"" from text
+            dataText = dataText.replace("|", "");
+            dataText = dataText.replace("&vert;", "");
+            dataText = dataText.replace("&#124;", "");
+
+            // check if expiration exists
+            if (dataExpiration) {
+                // check for mm-dd-yyyy
+                if (!/^\d{1,2}-\d{1,2}-\d{4}$/.test(dataExpiration)) {
+                    alert("Data expiration is invalid. Format should be mm-dd-yyyy.");                                        
+                    return false;
+                } else {            
+                    // parse the date parts to integers
+                    var parts = dataExpiration.split("-");
+                    var day = parseInt(parts[1], 10);
+                    var month = parseInt(parts[0], 10);
+                    var year = parseInt(parts[2], 10);
+                    // check the ranges of month and year
+                    if (year < 1000 || year > 3000 || month == 0 || month > 12) {
+                        alert("Data expiration is invalid. Format should be mm-dd-yyyy.");                                        
+                        return false;
+                    }                
+                    var monthLength = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
+                    // adjust for leap years
+                    if (year % 400 == 0 || (year % 100 != 0 && year % 4 == 0)) {
+                        monthLength[1] = 29;
+                    }
+                    // check the range of the day
+                    if (day > 0 && day <= monthLength[month - 1]) {
+                        // do nothing
+                    } else {
+                        alert("Data expiration is invalid. Format should be mm-dd-yyyy.");                                        
+                        return false;
+                    }
+                }
+            }
+
+            // check if account exists
+            if (dataAccount) {
+                // validate the account length             
+                if (dataAccount.length === 27) {
+                    // do nothing
+                } else {
+                    alert("Account is invalid. Account should be 27 characters.");                                        
+                    return false;
+                }
+                // validate the account content
+                for (var j = 0; j < dataAccount.length; j++) {
+                    if (("9ABCDEFGHIJKLMNOPQRSTUVWXYZ").indexOf(dataAccount.charAt(j)) < 0) {                            
+                        alert("Account should contain only letters A-Z or the number 9. Account is invalid.");                                        
+                        return false;
+                    }
+                }
+            } else {
+                // set to default Dariota account
+                dataAccount = defaultAccount;
+            }
+
+            // check if address exists
+            if (dataAddress) {
+                // validate the address length             
+                if ((dataAddress.length === 81) || (dataAddress.length === 90)) {
+                    // do nothing
+                } else {
+                    alert("Address is invalid. Address should be 90 characters.");                                        
+                    return false;
+                }
+                // validate the address content
+                for (var j = 0; j < dataAddress.length; j++) {
+                    if (("9ABCDEFGHIJKLMNOPQRSTUVWXYZ").indexOf(dataAddress.charAt(j)) < 0) {                            
+                        alert("Address should contain only letters A-Z or the number 9. Address is invalid.");                                        
+                        return false;
+                    }
+                }
+            }
+
+            // check recaptcha has been set
+            if (!recaptcha) {
+                alert("Please make sure to pass the recaptcha to prevent bots.");                                        
+                return false;
+            }
+
+            // create the message payload format
+            var message = dataType + "|" + latitude + " " + longitude + "|" + dataExpiration + "|" + dataAccount + "|" + dataAddress + "|" + dataText;        
+            
+            // convert latitude and longitude to just 1 decimal - parse off from string
+            var tempPos1 = latitude.indexOf("\.");
+            var tempPos2 = longitude.indexOf("\.");
+            var tempString1 = latitude.substring(0, tempPos1 + 2);
+            var tempString2 = longitude.substring(0, tempPos2 + 2);
+            var locationAddress = tempString1 + " " + tempString2;
+
+            // perform Dariota mapping
+            locationAddress = locationAddress.replace(/0/g, "A");
+            locationAddress = locationAddress.replace(/1/g, "B");
+            locationAddress = locationAddress.replace(/2/g, "C");
+            locationAddress = locationAddress.replace(/3/g, "D");
+            locationAddress = locationAddress.replace(/4/g, "E");
+            locationAddress = locationAddress.replace(/5/g, "F");
+            locationAddress = locationAddress.replace(/6/g, "G");
+            locationAddress = locationAddress.replace(/7/g, "H");
+            locationAddress = locationAddress.replace(/8/g, "I");
+            locationAddress = locationAddress.replace(/9/g, "J");
+            locationAddress = locationAddress.replace(/\./g, "K");
+            locationAddress = locationAddress.replace(/\-/g, "L");
+            locationAddress = locationAddress.replace(/\+/g, "M");
+            locationAddress = locationAddress.replace(/\ /g, "N");
+
+            // perform Dariota mapping - pad the address to the proper length
+            var tempLength = locationAddress.length;
+            var padLength = 81 - tempLength;
+            var i = 0;
+            while (i < padLength) {
+                locationAddress = locationAddress + "Z";
+                i++;
+            }
+
+            $('#loadingUpdate').show();
+            $('#loadingTextUpdate').show();	
+
+            // post data
+            $.ajax({
+                type: "POST",
+                url: '',
+                contentType: 'application/json',
+                data: JSON.stringify({                                     
+                    'address': locationAddress,
+                    'message': message,
+                    'tag': newTag,
+                    'recaptcha': recaptcha
+                }),
+                success: function(res){
+                    $('#loadingUpdate').hide();
+                    $('#loadingTextUpdate').hide();	
+                    $('#writeButton').hide();	
+                    $('#successMessageUpdate').show();	
+                },
+                error: function(){                    
+                    $('#loadingUpdate').hide();
+                    $('#loadingTextUpdate').hide();	
+                    $('#errorMessageUpdate').show();	
+                }
+            });
+
+            return false;
+        });  	                                     
+
+        
+    });	
+
+    </script>
+	
+  </body>
+  
+</html>
